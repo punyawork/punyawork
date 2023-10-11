@@ -1,0 +1,14 @@
+.DaanCardOffCanvas{
+    margin-top: 8rem;
+    background-color: #ff9600;
+}
+.daanCard{
+   
+    border: 1rem solid #ff9600;
+    margin-top: 20px;
+
+}
+.imageClass{
+    width:300px;
+    height: auto;
+}

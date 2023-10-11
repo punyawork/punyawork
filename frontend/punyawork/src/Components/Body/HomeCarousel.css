@@ -1,0 +1,15 @@
+.HomeCarousel{
+    width: 100%;
+    height:35rem;
+}
+.textColorClass{
+    color: #ff9600;
+    font-size: 2rem;
+}
+.carousel-control-prev-icon{
+    color: #ff9600 !important;  
+}
+
+.captionClass{
+    margin-bottom: 6rem !important;
+}

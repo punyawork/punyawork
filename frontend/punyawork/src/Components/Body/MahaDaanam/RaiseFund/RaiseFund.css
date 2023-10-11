@@ -1,0 +1,26 @@
+.fundRaiseDropDownContainer{
+    
+    
+    width: 500px;
+    
+    margin:5rem auto;
+}
+
+.signupButton{
+    width: 100%;
+}
+.AlertTitle{
+    color:#ff9600
+}
+.UserNameAndEmail{
+    font-weight: bold;
+}
+.dropListColumnName{
+    background-color: #ff9600 !important;
+    text-align: center;
+}
+.ImageClass{
+  
+    width: 90%;
+    height: 30rem;
+}

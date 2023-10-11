@@ -1,0 +1,14 @@
+.signUpContainer{
+    width: 500px;
+    margin: 40px auto;
+}
+
+.signupButton{
+    width: 100%;
+}
+.AlertTitle{
+    color:#ff9600
+}
+.UserNameAndEmail{
+    font-weight: bold;
+}

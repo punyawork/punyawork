@@ -1,0 +1,23 @@
+.punyaTextColor{
+    color: white !important;
+}
+
+.setProfileImage{
+    width:300px;
+    height: 300px;
+    margin-top: 20px;
+}
+.UserDetailList{
+    margin-top: 20px;
+    background-color: #ff9600 !important;
+}
+.labelClass{
+    margin-right: 5px;
+}
+.ListItem{
+    color: white;
+    background-color: #ff9600;
+}
+.EditImage{
+    margin-top: 20px;
+}
