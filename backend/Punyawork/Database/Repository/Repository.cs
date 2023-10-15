@@ -26,6 +26,15 @@ namespace Punyawork.Repository
 
         public async Task<List<T>> GetAll()
         {
+            try
+            {
+                return await punyaWorkContext.Set<T>().ToListAsync();
+            }
+            catch(Exception ex) { 
+                Console.WriteLine(ex);
+                
+            }
+
             return await punyaWorkContext.Set<T>().ToListAsync();
         }
 
