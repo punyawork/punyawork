@@ -45,7 +45,16 @@ namespace Punyawork.Repository
 
         public async Task<T> GetByID(int id)
         {
+            try
+            {
+                return await punyaWorkContext.Set<T>().FindAsync(id);
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
             return await punyaWorkContext.Set<T>().FindAsync(id);
+
         }
 
 
@@ -56,13 +65,13 @@ namespace Punyawork.Repository
             {
                 punyaWorkContext.Set<T>().Add(entity);
                 await punyaWorkContext.SaveChangesAsync();
-
+                return entity;
             }
             catch(Exception e)
             {
 Console.WriteLine(e);
             }
-            return entity;
+            return null;
         }
 
         public async Task Update(T entity)

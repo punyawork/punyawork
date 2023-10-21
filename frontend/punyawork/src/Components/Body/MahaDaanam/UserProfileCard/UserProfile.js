@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { useState, forwardRef, useImperativeHandle } from "react";
 import { Row, Col, Container } from "react-bootstrap";
-import './userProfile.css';
+
 import ListGroupItem from "react-bootstrap";
 import { ListGroup } from "react-bootstrap";
 import SumitImage from '../../../../Images/UsersImages/sumit.JPG';
@@ -64,29 +64,31 @@ const UserProfile = forwardRef((props, ref) => {
     }
     return (<>
         <Container>
-            <Offcanvas className="DaanCardOffCanvas" show={show} onHide={handleClose}>
-                <Offcanvas.Header closeButton>
-                    <Offcanvas.Title className="punyaTextColor">User Information</Offcanvas.Title>
+            <Offcanvas className="" show={show} onHide={handleClose}>
+                <Offcanvas.Header closeButton className="bg-kesari">
+                    <Offcanvas.Title className="text-white font-bold">User Information</Offcanvas.Title>
                 </Offcanvas.Header>
-
                 <Offcanvas.Body>
                     <Row>
-                        <img src={profileImageURL} className="profileImage" />
+                        <img src={profileImageURL} className="w-full h-[13rem]"/>
                     </Row>
                     <Row>
-                        <ListGroup className="UserDetailList">
-                            <ListGroup.Item variant="dark" className="ListItem">
-                                <label className="labelClass">Name:</label>{userData.FullName}</ListGroup.Item>
-                            <ListGroup.Item variant="dark" className="ListItem">  <label className="labelClass">Email:</label>{userData.Email}</ListGroup.Item>
-                            <ListGroup.Item variant="dark" className="ListItem">  <label className="labelClass">Mobile No.:</label>{userData.MobNumber}</ListGroup.Item>
-                            <ListGroup.Item variant="dark" className="ListItem">  <label className="labelClass">Address:</label>Payarepur, Barauli, PostOffice=Barauli</ListGroup.Item>
-                            <ListGroup.Item variant="dark" className="ListItem">  <label className="labelClass">Country:</label>India</ListGroup.Item>
-                            <ListGroup.Item variant="light" className="ListItem">  <label className="labelClass">UPI Mobile No.:</label>8507064152</ListGroup.Item>
-                            <ListGroup.Item variant="dark" className="ListItem">
-                                <label className="labelClass">Total Fund Raised</label>0</ListGroup.Item>
-                            <ListGroup.Item variant="dark" className="ListItem">
-                                <label className="labelClass">Blessings</label>0</ListGroup.Item>
-                        </ListGroup>
+                        <ul className="p-[2rem] bg-green">
+                            <li className="text-white font-bold">
+                                <label className="pr-[2rem]">Name:</label>{userData.FullName}</li>
+                            <li className="text-white font-bold">  <label className="pr-[2rem]">Email:</label>{userData.Email}</li>
+                            <li className="text-white font-bold">  <label className="pr-[2rem]">Mobile No.:</label>{userData.MobNumber}
+                            </li>
+                           
+                            
+                            <li className="text-white font-bold">  <label className="pr-[2rem]">UPI Mobile No.:</label>
+                            {userData.MobNumber}</li>
+                            <li className="text-white font-bold">
+                                <label className="pr-[2rem]">Total Fund Raised</label>0</li>
+                            <li className="text-white font-bold">
+                                <label className="pr-[2rem]">Blessings</label>0</li>
+                                <li className="text-white font-bold">  <label className="pr-[2rem]">Country:</label>India</li>
+                        </ul>
                     </Row>
 
                 </Offcanvas.Body>

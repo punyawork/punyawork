@@ -54,16 +54,17 @@ namespace Punyawork.Controllers
 
         [HttpPost]
         [Route("LoginDetail")]
-        public async Task<string> LoginDetail(Login login)
+        public async Task<ReturnResultValidate> LoginDetail(Login login)
         { 
             ReturnResultValidate returnResult2 = new ReturnResultValidate();
             returnResult2 = await LoginService.ValidateUserLoginDetail(login);
-            return returnResult2.Result;
+            return returnResult2;
         }
         [HttpGet]
         [Route("UserProfileDataByItsId")]
         public async Task<Login> UserProfileDataByItsId(int id)
         {
+
             Login userLoginInfo = await LoginService.GetUserLoginDetail(id);
             userLoginInfo.Password = "";
             return userLoginInfo;

@@ -73,3 +73,5 @@ React react app=npx create-react-app my-app
 install React Bootstrap == npm install react-bootstrap bootstrap@5.1.3  
 install React Router Dom== npm install react-router-dom
 install axios =npm install axios
+Installing Tailwind CSS Extension
+Install Prettier Extension for Code Formating
