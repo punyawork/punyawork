@@ -1,4 +1,5 @@
-﻿using Punyawork.Interface;
+﻿using MySql.Data.MySqlClient;
+using Punyawork.Interface;
 using Punyawork.IRepository;
 using Punyawork.Models.Entity;
 using System;
@@ -30,10 +31,10 @@ namespace Punyawork.Implementation
             try
             {
                 string query = "USP_UpdateLocation @LocationID, @LocationName ";
-                SqlParameter[] param = new SqlParameter[]
+                MySqlParameter[] param = new MySqlParameter[]
                 {
-                    new SqlParameter("@LocationID", location.LocationID),
-                    new SqlParameter("@LocationName", location.LocationName),
+                    new MySqlParameter("@LocationID", location.LocationID),
+                    new MySqlParameter("@LocationName", location.LocationName),
                 };
                 List<ReturnResult> returns = await _returnResult.GetFromSQL(query, param);
                 return returns;
@@ -114,10 +115,10 @@ namespace Punyawork.Implementation
             try
             {
                 string query = "USP_DeleteLocations @DeletedRecords,@DeletedOn,@DeletedBy";
-                SqlParameter[] param = new SqlParameter[] {
-                    new SqlParameter("@DeletedRecords", deleteSelected),
-                    new SqlParameter("@DeletedOn", DateTime.Now),
-                    new SqlParameter("@DeletedBy", 1),
+                MySqlParameter[] param = new MySqlParameter[] {
+                    new MySqlParameter("@DeletedRecords", deleteSelected),
+                    new MySqlParameter("@DeletedOn", DateTime.Now),
+                    new MySqlParameter("@DeletedBy", 1),
                 };
                 List<ReturnResult> returns = await _returnResult.GetFromSQL(query, param);
                 return returns;

@@ -1,4 +1,5 @@
-﻿using Punyawork.Constant;
+﻿using MySql.Data.MySqlClient;
+using Punyawork.Constant;
 using Punyawork.Database.Entity;
 using Punyawork.Database.IService;
 using Punyawork.Database.Service;
@@ -37,9 +38,9 @@ namespace Punyawork.Implementation
         {
             try
             {
-                string query = "GetUserSignUPID @Email";
-                SqlParameter[] param = new SqlParameter[] {
-                    new SqlParameter("@Email", fundRaise.Email),
+                string query = "CALL GetUserSignUPID (@Email)";
+                MySqlParameter[] param = new MySqlParameter[] {
+                    new MySqlParameter("@Email", fundRaise.Email),
                 };
                 List<ReturnUserSignUpID> returns = await _UserSignupID.GetFromSQL(query, param);
                 return returns[0].Id;
@@ -91,10 +92,10 @@ namespace Punyawork.Implementation
         {
             try
             {
-                string query = "UserFundRaiseDuplication @Email,@UPIMobNumber";
-                SqlParameter[] param = new SqlParameter[] {
-                    new SqlParameter("@Email", fundRaise.Email),
-                    new SqlParameter("@UPIMobNumber", fundRaise.UPIMobNumber),
+                string query = "CALL UserFundRaiseDuplication (@Email,@UPIMobNumber)";
+                MySqlParameter[] param = new MySqlParameter[] {
+                    new MySqlParameter("@Email", fundRaise.Email),
+                    new MySqlParameter("@UPIMobNumber", fundRaise.UPIMobNumber),
                 };
                 List<ReturnResultValidate> returns = await _returnResultValidate.GetFromSQL(query, param);
                 return returns[0];
@@ -109,17 +110,17 @@ namespace Punyawork.Implementation
         {
             try
             {
-                string loginDetailValidationQuery = "UserLoginDetailValidation @Email,@Password";
-                SqlParameter[] param = new SqlParameter[] {
-                    new SqlParameter("@Email", fundRaise.Email),
-                    new SqlParameter("@Password", fundRaise.FullName),
+                string loginDetailValidationQuery = "CALL UserLoginDetailValidation (@Email,@Password)";
+                MySqlParameter[] param = new MySqlParameter[] {
+                    new MySqlParameter("@Email", fundRaise.Email),
+                    new MySqlParameter("@Password", fundRaise.FullName),
                 };
                 List<ReturnResultValidate> userLoginValidationResult = await _returnResultValidate.GetFromSQL(loginDetailValidationQuery, param);
                 if (userLoginValidationResult[0].Result == ApplicationConstant.NotExits)
                 {
-                    string emailValidationQuery = "UserLoginEmailValidation @Email";
-                    SqlParameter[] paramsn = new SqlParameter[] {
-                    new SqlParameter("@Email", fundRaise.Email),
+                    string emailValidationQuery = "CALL UserLoginEmailValidation (@Email)";
+                    MySqlParameter[] paramsn = new MySqlParameter[] {
+                    new MySqlParameter("@Email", fundRaise.Email),
 
                 };
                     List<ReturnResultValidate> UserEmailValidationResult = await _returnResultValidate.GetFromSQL(emailValidationQuery, paramsn);

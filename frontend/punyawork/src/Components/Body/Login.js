@@ -4,14 +4,14 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
-import './Login.css'
+
 import Header from '../Header/Header.js'
 import HomeCarousel from './HomeCarousel';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Modal from 'react-bootstrap/Modal';
 import Footer from '../Footer/Footer.js';
-
+import '../../Styles.css'
 
 function Login() {
   const endpoint = "https://localhost:44308/logindetail";
@@ -43,10 +43,14 @@ function Login() {
         Email: email,
         Password: password
       }).then((response) => {
-        if (response.status == 200 && response.data == "WrongPassword") {
+        
+        if (response.status == 200 && response.data.Result == "WrongPassword") {
           setIsPasswordWrong(true);
-        } else if (response.status == 200 && response.data == "CorrectDetails") {
+        } else if (response.status == 200 && response.data.Result == "CorrectDetails") {
           handleShow();
+          const userIdBase64 = btoa(response.data.Count.toString());
+          localStorage.setItem("pwc",userIdBase64)
+         
         }
       })
     } catch (e) {
@@ -59,25 +63,25 @@ const[isLogin, setIsLogin]=useState(false);
     if(storedUserIdBase64!=null){
       window.location.href = "http://localhost:3000/daanam";
     }
-  })
+  },[])
   return (
     <>
       <header className="sticky-header">
         <Header />
       </header>
       <HomeCarousel />
-      <div className="LoginContainer">
-        <h1 style={{ textAlign: 'center' }}>Login</h1>
+      <div className="flex flex-col p-[1rem] md:w-[50%] mx-auto">
+        <h1 className='text-center text-kesari'>Login</h1>
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
           <Row className="mb-3">
             <Form.Group controlId="validationCustomUsername">
-              <Form.Label>Username</Form.Label>
+              <Form.Label className='text-kesari'>Username</Form.Label>
               <Form.Control type='test' placeholder='Enter UserName...' required onChange={(e) => { setEmail(e.target.value) }} />
             </Form.Group>
           </Row>
           <Row className="mb-3">
             <Form.Group controlId="validationCustom03">
-              <Form.Label>Password</Form.Label>
+              <Form.Label className='text-kesari'>Password</Form.Label>
               <Form.Control type="password" placeholder="Enter Password..." required onChange={(e) => {
                 SetPassword(e.target.value);
                 setIsPasswordWrong(false);
@@ -85,7 +89,7 @@ const[isLogin, setIsLogin]=useState(false);
               {isPasswordWrong ? <p className='AlertTitle'>Your Password is Wrong</p> : <></>}
             </Form.Group>
           </Row>
-          <Button className="button" type="submit">Login</Button>
+          <button className="bg-kesari text-red px-[.75rem] py-[.5rem] rounded-[.3rem] text-white font-sm" type="submit">Login</button>
         </Form>
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
@@ -95,8 +99,8 @@ const[isLogin, setIsLogin]=useState(false);
             <p>You are welcome to the <label className='darkFont'>One to One Donation Portal</label>. Please <label className='darkFont'>donate with Heart </label> and <label className='darkFont'>Not more than Rs. 5 on a single day</label></p>
           </Modal.Body>
         </Modal>
-        <h1 style={{ textAlign: 'center' }}>OR</h1>
-        <p>If you do not have an account then please <a href='/signup' className='bodyLink'>create it.</a></p>
+        <h1 className='text-center text-kesari'>OR</h1>
+        <p>If you do not have an account then please <a href='/signup' className='bg-kesari px-[1rem] pb-[.5rem] text-[1.5rem] hover:text-kesari'>create it.</a></p>
       </div>
       <footer>
         <Footer />

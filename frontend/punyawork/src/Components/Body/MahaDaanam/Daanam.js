@@ -25,6 +25,10 @@ const Daanam = () => {
   }
   useEffect(() => {
     GetAllFundRaiseData();
+    const storedUserIdBase64 = localStorage.getItem('pwc');
+    if(storedUserIdBase64==null){
+      window.location.href = "http://localhost:3000";
+    }
   }, []);
 
   return (

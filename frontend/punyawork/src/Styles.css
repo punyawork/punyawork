@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+a{
+    color:white !important;
+    text-decoration: none !important;
+}
+a:hover{
+    text-decoration: underline !important;
+}
+.dropdownButton, .dropListColumnName{
+    background-color: #ff9600 !important;
+    text-align: center;
+}

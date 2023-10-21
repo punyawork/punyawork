@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import RaiseFund from './Components/Body/MahaDaanam/RaiseFund/RaiseFund';
 import SetUserProfile from './Components/Body/MahaDaanam/UserProfileCard/SetUserProfile';
 import Footer from './Components/Footer/Footer';
+import './Styles.css'
 
 function App() {
   

@@ -1,72 +1,55 @@
 import React from "react"
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, div, Col } from "react-bootstrap";
 
-import './Footer.css';
+
 
 
 const Footer = () => {
 
     return (
-        <div style={{ backgroundColor: "green" }}>
-            <Container className="FooterClass">
-                <Row>
-                    <Col>
-                        <p className="aboutpunyawork">PunyaWork</p>
-                        <p className="punyaworkdescription">PunyaWork is an online portal. We are promoting One to One Donation.</p>
-                    </Col>
-                    <Col>
-                        <Row>
-                            <a className="navLinks" href="#">Insights</a>
-                        </Row>
-                        <Row>
+        <div className='bg-green p-[1rem]'>
+            <div className='flex flex-col md:flex-row'>
+                    <div className="md:w-[40%]">
+                        <p className="text-white font-bold">PunyaWork</p>
+                        <p className="text-white">PunyaWork is an online portal. We are promoting One to One Donation.</p>
+                    </div>
+                    <div className='md:w-[30%] pb-[2rem]'>
+                        <div>
+                            <a className="font-bold" href="#">Insights</a>
+                        </div>
+                        <div>
                             <a className="navLinks" href="/daanam">Daanam</a>
-                        </Row>
-                        <Row>
+                        </div>
+                        <div>
                             <a className="navLinks" href="/raisefund">RaiseFund</a>
-                        </Row>
-                        <Row>
+                        </div>
+                        <div>
                             <a className="navLinks" href="/signup">Create Your Account</a>
-                        </Row>
-                        <Row>
+                        </div>
+                        <div>
                             <a className="navLinks" href="/">Login</a>
-                        </Row>
-                    </Col>
-                    <Col>
-                        <Row>
-                            <a className="navLinks" href="#">Social Media</a>
-                        </Row>
-                        <Row>
+                        </div>
+                    </div>
+                    <div className="md:w-[30%]">
+                        <div>
+                            <a className="font-bold" href="#">Social Media</a>
+                        </div>
+                        <div>
                             <a className="navLinks" href="/daanam">Facebook</a>
-                        </Row>
-                        <Row>
+                        </div>
+                        <div>
                             <a className="navLinks" href="/daanam">Twitter</a>
-                        </Row>
-                        <Row>
+                        </div>
+                        <div>
                             <a className="navLinks" href="/daanam">Instagram</a>
-                        </Row>
-                        <Row>
+                        </div>
+                        <div>
                             <a className="navLinks" href="/daanam">LinkedIn</a>
-                        </Row>
-                    </Col>
-                    {/* <Col>
-                        <Row>
-                            <a className="navLinks" href="#">Our Partners</a>
-                        </Row>
-                        <Row>
-                            <a className="navLinks" href="/daanam">Daanam</a>
-                        </Row>
-                        <Row>
-                            <a className="navLinks" href="/daanam">Daanam</a>
-                        </Row>
-                        <Row>
-                            <a className="navLinks" href="/daanam">Daanam</a>
-                        </Row>
-                        <Row>
-                            <a className="navLinks" href="/daanam">Daanam</a>
-                        </Row>
-                    </Col> */}
-                </Row>
-            </Container>
+                        </div>
+                    </div>
+                   
+               
+            </div>
 
         </div>
 

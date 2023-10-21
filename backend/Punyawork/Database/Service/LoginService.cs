@@ -1,4 +1,5 @@
-﻿using Punyawork.Constant;
+﻿using MySql.Data.MySqlClient;
+using Punyawork.Constant;
 using Punyawork.Database.Entity;
 using Punyawork.Database.IService;
 using Punyawork.Database.Service;
@@ -20,16 +21,16 @@ namespace Punyawork.Implementation
         public readonly IRepository<Login> _login;
         public readonly IRepository<ReturnResultValidate> _returnResultValidate;
         public readonly IRepository<ReturnResult> _returnResult;
-        
+
         public IEmailService _emailService;
-        
-        public LoginService(IRepository<Login> login, IRepository<ReturnResultValidate> returnResultValidate,IEmailService emailservice,IRepository<ReturnResult> returnResult)
+
+        public LoginService(IRepository<Login> login, IRepository<ReturnResultValidate> returnResultValidate, IEmailService emailservice, IRepository<ReturnResult> returnResult)
         {
             _login = login;
 
             _returnResultValidate = returnResultValidate;
-            _emailService= emailservice;
-            _returnResult= returnResult;
+            _emailService = emailservice;
+            _returnResult = returnResult;
 
 
 
@@ -40,7 +41,7 @@ namespace Punyawork.Implementation
         {
             Login login = await _login.GetByID(id);
             return login;
-           
+
         }
 
         public async Task<ReturnResultValidate> SaveLoginData(Login login)
@@ -61,7 +62,7 @@ namespace Punyawork.Implementation
                         login.IsActive = true;
                         login.BlessingPoints = 0;
                         login.TotalFundRasie = 0;
-                        login.ProfileImageName = "profile.jpg";
+                        login.ProfileImageName = "profile.png";
                         Login s = await _login.Insert(login);
                         returnResult.Result = ApplicationConstant.DataSaved;
                         returnResult.Count = s.Id;
@@ -84,9 +85,9 @@ namespace Punyawork.Implementation
         {
             try
             {
-                string query = "SignUp_Duplication @Email";
-                SqlParameter[] param = new SqlParameter[] {
-                    new SqlParameter("@Email", login.Email),
+                string query = "CALL SignUp_Duplication (@Email)";
+                MySqlParameter[] param = new MySqlParameter[] {
+                    new MySqlParameter("@Email", login.Email),
                 };
                 List<ReturnResultValidate> returns = await _returnResultValidate.GetFromSQL(query, param);
                 return returns[0];
@@ -101,19 +102,18 @@ namespace Punyawork.Implementation
         {
             try
             {
-                string loginDetailValidationQuery = "UserLoginDetailValidation @Email,@Password";
-                SqlParameter[] param = new SqlParameter[] {
-                    new SqlParameter("@Email", login.Email),
-                    new SqlParameter("@Password", login.Password),
+                string loginDetailValidationQuery = "CALL UserLoginDetailValidation (@Email,@Password)";
+                MySqlParameter[] param = new MySqlParameter[] {
+                    new MySqlParameter("@Email", login.Email),
+                    new MySqlParameter("@Password", login.Password),
                 };
                 List<ReturnResultValidate> userLoginValidationResult = await _returnResultValidate.GetFromSQL(loginDetailValidationQuery, param);
                 if (userLoginValidationResult[0].Result == ApplicationConstant.NotExits)
                 {
-                    string emailValidationQuery = "UserLoginEmailValidation @Email";
-                    SqlParameter[] paramsn = new SqlParameter[] {
-                    new SqlParameter("@Email", login.Email),
-
-                };
+                    string emailValidationQuery = "CALL UserLoginEmailValidation (@Email)";
+                    MySqlParameter[] paramsn = new MySqlParameter[] {
+                    new MySqlParameter("@Email", login.Email),
+                    };
                     List<ReturnResultValidate> UserEmailValidationResult = await _returnResultValidate.GetFromSQL(emailValidationQuery, paramsn);
 
                     if (UserEmailValidationResult[0].Result == ApplicationConstant.NotExits)
@@ -139,7 +139,7 @@ namespace Punyawork.Implementation
         }
         public string GenerateHtmlEmailBody(string recipientName, string email, string password)
         {
-           
+
             string htmlBody = $@"
             <!DOCTYPE html>
             <html>
@@ -159,15 +159,23 @@ namespace Punyawork.Implementation
 
         public async Task<ReturnResult> UpdateUserSignUpData(Login login)
         {
-           
+
             try
             {
 
-                string query = "UpdateUserSignUpData @Id, @ProfileImageName ";
-                SqlParameter[] param = new SqlParameter[]
+                string query = "CALL UpdateUserSignUpData (@Id, @FullName,@Email,@MobNumber," +
+                    "@UPINumber,@Address, @Country, @ProfileImageName)";
+                MySqlParameter[] param = new MySqlParameter[]
                 {
-                    new SqlParameter("@Id", login.Id),
-                    new SqlParameter("@ProfileImageName", login.ProfileImageName),
+                    new MySqlParameter("@Id", login.Id),
+                     new MySqlParameter("@FullName", login.FullName),
+                      new MySqlParameter("@Email", login.Email),
+                       new MySqlParameter("@MobNumber", login.MobNumber),
+                        new MySqlParameter("@UPINumber", login.UPINumber),
+                         new MySqlParameter("@Address", login.Address),
+                          new MySqlParameter("@Country", login.Country),
+
+                    new MySqlParameter("@ProfileImageName", login.ProfileImageName),
                 };
                 List<ReturnResult> returns = await _returnResult.GetFromSQL(query, param);
                 return returns[0];
@@ -177,7 +185,7 @@ namespace Punyawork.Implementation
                 Console.WriteLine(ex);
                 throw;
             }
-            
+
         }
     }
 }
