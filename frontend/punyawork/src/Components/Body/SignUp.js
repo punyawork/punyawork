@@ -9,8 +9,9 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Modal from 'react-bootstrap/Modal';
 import Footer from '../Footer/Footer';
-
+import applicationbackendconfig from '../../applicationbackend.config';
 function SignUp() {
+  const apiHost=applicationbackendconfig.apiHostUrl;
   const navigate = useNavigate();
   const [validated, setValidated] = useState(false);
   const [fullName, SetFullName] = useState('');
@@ -18,7 +19,7 @@ function SignUp() {
   const [mobNumber, SetMobNumber] = useState('');
   const [password, SetPassword] = useState('');
   const [requestBodyData, SetRequestBodyData] = useState({})
-  const endpoint = "https://localhost:44308/signup";
+  const endpoint = apiHost+"/signup";
   const [userRegister,setUserRegister]=useState(false);
   const [show, setShow] = useState(false);
 

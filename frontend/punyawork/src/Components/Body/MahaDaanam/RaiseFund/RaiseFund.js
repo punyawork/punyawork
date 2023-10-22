@@ -11,7 +11,10 @@ import Modal from "react-bootstrap/Modal";
 import Dropdown from "react-bootstrap/Dropdown";
 import Image from "react-bootstrap/Image";
 import Footer from "../../../Footer/Footer";
+import applicationbackendconfig from "../../../../applicationbackend.config";
+
 const RaiseFund = () => {
+  const apiHost=applicationbackendconfig.apiHostUrl;
   const navigate = useNavigate();
   const [validated, setValidated] = useState(false);
   const [fullName, setFullName] = useState("");
@@ -21,9 +24,9 @@ const RaiseFund = () => {
   const [fundAmount, setFundAmount] = useState(0);
   const [lastDateForFund, setLastDateForFund] = useState("");
   const [isChecked, setIsChecked] = useState(false);
-  const endpointForSavingData = "https://localhost:44308/SaveFundRaise";
+  const endpointForSavingData = apiHost+"/SaveFundRaise";
   const endpointForIMageUpload =
-    "https://localhost:44308/api/FileUpload/UploadImage";
+  apiHost+"/api/FileUpload/UploadImage";
   const [userRegister, setUserRegister] = useState(false);
 
   const [selectedValue, setSelectedValue] = useState(

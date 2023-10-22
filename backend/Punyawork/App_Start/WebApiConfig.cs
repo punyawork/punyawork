@@ -35,7 +35,7 @@ namespace Punyawork
             
             config.DependencyResolver = new UnityResolver(container);
 
-            EnableCorsAttribute cors = new EnableCorsAttribute("http://localhost:3000", "*", "*");
+            EnableCorsAttribute cors = new EnableCorsAttribute("http://www.punyawork.com", "*", "*");
             config.EnableCors(cors);
 
             // Web API routes

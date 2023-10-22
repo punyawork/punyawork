@@ -13,13 +13,15 @@ import Footer from "../../../Footer/Footer";
 import Image from "react-bootstrap/Image";
 import Form from "react-bootstrap/Form";
 import "../../../../Styles.css";
+import applicationbackendconfig from "../../../../applicationbackend.config";
 
 const SetUserProfile = () => {
+  const apiHost=applicationbackendconfig.apiHostUrl;
   const storedUserIdBase64 = localStorage.getItem("pwc");
   let userId = parseInt(atob(storedUserIdBase64), 10);
   const [show, setShow] = useState(false);
   const UserProfileEndpoint =
-    "https://localhost:44308/UserProfileDataByItsId?id=";
+  apiHost+"/UserProfileDataByItsId?id=";
   const [userData, setUserData] = useState({});
   const [profileImage, setProfileImage] = useState(null);
   const [profileImageURL, setProfileImageURL] = useState(null);
@@ -65,7 +67,7 @@ const SetUserProfile = () => {
 
     fileUploadAPi(selectedFile);
   };
-  const updateEndpoint = "https://localhost:44308/UpdateSignUpData";
+  const updateEndpoint = apiHost+"/UpdateSignUpData";
   const SaveUserDetailUpdateData = async (imageName) => {
     try {
       await axios
@@ -92,7 +94,7 @@ const SetUserProfile = () => {
     setShow(true);
   };
   const endpointForIMageUpload =
-    "https://localhost:44308/api/FileUpload/UploadImage";
+  apiHost+"/api/FileUpload/UploadImage";
   const fileUploadAPi = async (selectedFile) => {
     debugger;
     try {
@@ -123,7 +125,7 @@ const SetUserProfile = () => {
     GetUserProfileData(userId);
     
   }, []);
-  var ImgaeAPIURL = "https://localhost:44308/GetFile?filename=";
+  var ImgaeAPIURL = apiHost+"/GetFile?filename=";
   function getFileExtension(fileName) {
     return fileName.split('.').pop();
   }

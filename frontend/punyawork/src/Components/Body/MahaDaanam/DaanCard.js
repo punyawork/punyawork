@@ -8,18 +8,20 @@ import UserProfile from "./UserProfileCard/UserProfile";
 
 import axios from "axios";
 import "../../../Styles.css";
+import applicationbackendconfig from "../../../applicationbackend.config";
 
 const DaanCard = ({ daanCardData }) => {
+  const apiHost=applicationbackendconfig.apiHostUrl;
   const [showProfile, setShowProfile] = useState(false);
   const childRef = useRef();
   const showUserProfile = (event) => {
     childRef.current.handleShow(event.target.id);
   };
   function getFileExtension(fileName) {
-    return fileName.slice(((fileName.lastIndexOf(".") - 1) >>> 0) + 2);
+    return fileName.split('.').pop();
   }
   const [medicalImage, setMedicalImage] = useState(null);
-  var ImgaeAPIURL = "https://localhost:44308/GetFile?filename=";
+  var ImgaeAPIURL = apiHost+"/GetFile?filename=";
   const GetImage = async () => {
     try {
       if (daanCardData != null) {
