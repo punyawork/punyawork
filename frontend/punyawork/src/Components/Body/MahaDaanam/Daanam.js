@@ -4,6 +4,7 @@ import Header from "../../Header/Header";
 import DaanCard from "./DaanCard";
 import axios from "axios";
 import Footer from "../../Footer/Footer";
+import { Spinner } from "react-bootstrap";
 const Daanam = () => {
 
   var AllFunds = [{}];
@@ -42,7 +43,8 @@ const Daanam = () => {
           AllFundsData.length>0?
           AllFundsData.map((item,index)=>{
            return<DaanCard key={index} daanCardData={item} />
-          }):<p>data is loadig</p>
+          }):<div className="h-[20rem] flex justify-center">
+            <Spinner animation="border" className="object-center m-auto text-kesari md:p-[2rem]" size="lg" /></div> 
         }
         
       </main>

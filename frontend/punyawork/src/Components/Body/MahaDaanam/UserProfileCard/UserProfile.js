@@ -3,8 +3,8 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import { useState, forwardRef, useImperativeHandle } from "react";
 import { Row, Col, Container } from "react-bootstrap";
 
-import ListGroupItem from "react-bootstrap";
-import { ListGroup } from "react-bootstrap";
+import divstGroupItem from "react-bootstrap";
+import { divstGroup } from "react-bootstrap";
 import SumitImage from '../../../../Images/UsersImages/sumit.JPG';
 import axios from "axios";
 
@@ -38,7 +38,7 @@ const UserProfile = forwardRef((props, ref) => {
     }));
     var ImgaeAPIURL = "https://localhost:44308/GetFile?filename=";
     function getFileExtension(fileName) {
-        return fileName.slice(((fileName.lastIndexOf(".") - 1) >>> 0) + 2);
+        return fileName.split('.').pop();
       }
       const [profileImageURL, setProfileImageURL] = useState(null);
 
@@ -70,25 +70,29 @@ const UserProfile = forwardRef((props, ref) => {
                 </Offcanvas.Header>
                 <Offcanvas.Body>
                     <Row>
-                        <img src={profileImageURL} className="w-full h-[13rem]"/>
+                        <img src={profileImageURL} className="w-full h-[13rem] object-contain"/>
                     </Row>
                     <Row>
-                        <ul className="p-[2rem] bg-green">
-                            <li className="text-white font-bold">
-                                <label className="pr-[2rem]">Name:</label>{userData.FullName}</li>
-                            <li className="text-white font-bold">  <label className="pr-[2rem]">Email:</label>{userData.Email}</li>
-                            <li className="text-white font-bold">  <label className="pr-[2rem]">Mobile No.:</label>{userData.MobNumber}
-                            </li>
-                           
-                            
-                            <li className="text-white font-bold">  <label className="pr-[2rem]">UPI Mobile No.:</label>
-                            {userData.MobNumber}</li>
-                            <li className="text-white font-bold">
-                                <label className="pr-[2rem]">Total Fund Raised</label>0</li>
-                            <li className="text-white font-bold">
-                                <label className="pr-[2rem]">Blessings</label>0</li>
-                                <li className="text-white font-bold">  <label className="pr-[2rem]">Country:</label>India</li>
-                        </ul>
+                        <div className="p-[2rem] bg-green flex flex-col">
+                            <div className="text-white font-bold mb-[.5rem]">
+                            <label className="pr-[2rem] text-left">Name:</label>
+                            <p className="text-left">{userData.FullName}</p></div>
+                            <div className="text-white font-bold mb-[.5rem]">  <label className="pr-[2rem]">Email:</label>
+                            <p>{userData.Email}</p></div>
+                            <div className="text-white font-bold mb-[.5rem]">  <label className="pr-[2rem]">Mobile No.:</label>
+                            <p>{userData.MobNumber}</p>
+                            </div>
+                            <div className="text-white font-bold mb-[.5rem]">  <label className="pr-[2rem]">UPI Mobile No.:</label>
+                           <p> {userData.MobNumber}</p></div>
+                            <div className="text-white font-bold mb-[.5rem]">
+                                <label className="pr-[2rem]">Total Fund Raised</label>
+                                <p>{userData.TotalFundRasie}</p></div>
+                            <div className="text-white font-bold mb-[.5rem]">
+                                <label className="pr-[2rem]">Blessings</label>
+                                <p>{userData.BlessingPoints}</p></div>
+                            <div className="text-white font-bold mb-[.5rem]">  <label className="pr-[2rem]">Country:</label>
+                                <p>{userData.Country}</p></div>
+                        </div>
                     </Row>
 
                 </Offcanvas.Body>

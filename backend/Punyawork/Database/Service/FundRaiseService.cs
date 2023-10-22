@@ -31,6 +31,7 @@ namespace Punyawork.Implementation
 
         public Task<List<FundRaise>> GetFundRaisedDetail()
         {
+
             return _fundRaise.GetAll();
         }
 

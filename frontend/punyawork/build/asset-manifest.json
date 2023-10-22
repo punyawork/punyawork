@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/static/css/main.24e44cbc.css",
+    "main.js": "/static/js/main.db172b7b.js",
+    "static/js/787.3aea8fed.chunk.js": "/static/js/787.3aea8fed.chunk.js",
+    "static/media/sumit.JPG": "/static/media/sumit.4d24980117cf0d00f138.JPG",
+    "static/media/Mobile Donate.jpg": "/static/media/Mobile Donate.0236dd7a4a98ae3a9bfc.jpg",
+    "static/media/MoneyImage.jpg": "/static/media/MoneyImage.c98801647d6c54bbf409.jpg",
+    "static/media/laptop.jpg": "/static/media/laptop.28489d676e6c8ff42686.jpg",
+    "static/media/DigitalImage.webp": "/static/media/DigitalImage.e88cf19967856d83b942.webp",
+    "static/media/PunyaWorkLogo.PNG": "/static/media/PunyaWorkLogo.3477e4b8e15ef68d8184.PNG",
+    "static/media/Connecting world.jpg": "/static/media/Connecting world.53d168148d6135627007.jpg",
+    "index.html": "/index.html",
+    "main.24e44cbc.css.map": "/static/css/main.24e44cbc.css.map",
+    "main.db172b7b.js.map": "/static/js/main.db172b7b.js.map",
+    "787.3aea8fed.chunk.js.map": "/static/js/787.3aea8fed.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.24e44cbc.css",
+    "static/js/main.db172b7b.js"
+  ]
+}

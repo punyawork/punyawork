@@ -52,6 +52,9 @@ namespace Punyawork.Controllers
         { 
             List<FundRaise> returnResult2 = new List<FundRaise>();
             returnResult2 = await fundRaiseService.GetFundRaisedDetail();
+
+            returnResult2.Where(x=>x.isFundRaisePublished==true).ToList();
+
             return returnResult2;
         }
 

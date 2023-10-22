@@ -52,13 +52,14 @@ const SetUserProfile = () => {
   
   useEffect(() => {
     GetImage();
-    setProfileImageName(userData.ProfileImageName);
+    
   }, [userData]);
   const handleProfileImage = (e) => {
     debugger;
     var selectedFile = e.target.files[0];
     setProfileImage(selectedFile);
     setProfileImageName(selectedFile.name);
+    setUserData(prevUserData=>({...prevUserData,ProfileImageName:selectedFile.name}))
     const fileURL = URL.createObjectURL(selectedFile);
     setProfileImageURL(fileURL);
 
@@ -68,22 +69,13 @@ const SetUserProfile = () => {
   const SaveUserDetailUpdateData = async (imageName) => {
     try {
       await axios
-        .post(updateEndpoint, {
-          Id: userId,
-          FullName:fullName,
-          Email:email,
-          MobNumber:mobNumber,
-          UPINumber:upiMobNumber,
-          Address:address,
-          Country:country,
-          ProfileImageName: profileImageName,
-        })
+        .post(updateEndpoint, userData)
         .then((response) => {
           if (
             response.status == 200 &&
             response.data.Result == "UserProfileDataUpdated"
           ) {
-            GetUserProfileData(userId);
+            // GetUserProfileData(userId);
             alert("Your Profile Date Updated");
           } else if (response.status != 200) {
             alert(
@@ -133,11 +125,12 @@ const SetUserProfile = () => {
   }, []);
   var ImgaeAPIURL = "https://localhost:44308/GetFile?filename=";
   function getFileExtension(fileName) {
-    return fileName.strce(((fileName.lastIndexOf(".") - 1) >>> 0) + 2);
+    return fileName.split('.').pop();
   }
   const GetImage = async () => {
     try {
       if (userData != null) {
+        debugger;
         var extension = getFileExtension(userData.ProfileImageName);
         await axios
           .get(ImgaeAPIURL + userData.ProfileImageName, {
@@ -181,6 +174,7 @@ const SetUserProfile = () => {
               type="file"
               className="border-b-[.1rem] text-[.75rem] border-b-black border-t-0 outline-none"
               onChange={(e)=>{ handleProfileImage(e)
+                
               }}
             />
             <Image
@@ -201,7 +195,7 @@ const SetUserProfile = () => {
               type="text"
               className="border-b-[.1rem] text-[.75rem] border-b-black border-t-0 outline-none"
               defaultValue={userData.FullName}
-              onChange={(e)=>{ setFullName(e.target.value)
+              onChange={(e)=>{ setUserData(prevUserData=>({...prevUserData,FullName:e.target.value}))
               }}
               required
             />
@@ -218,7 +212,7 @@ const SetUserProfile = () => {
               type="text"
               className="border-b-[.1rem] text-[.75rem] border-b-black border-t-0 outline-none"
               defaultValue={userData.Email}
-              onChange={(e)=>{ setEmail(e.target.value)
+              onChange={(e)=>{ setUserData(prevUserData=>({...prevUserData,Email:e.target.value}))
               }}
               required
             />
@@ -235,7 +229,7 @@ const SetUserProfile = () => {
               type="text"
               className="border-b-[.1rem] text-[.75rem] border-b-black border-t-0 outline-none"
               defaultValue={userData.MobNumber}
-              onChange={(e)=>{ setMobNumber(e.target.value)
+              onChange={(e)=>{ setUserData(prevUserData=>({...prevUserData,MobNumber:e.target.value}))
               }}
               required
             />
@@ -252,7 +246,7 @@ const SetUserProfile = () => {
               type="text"
               className="border-b-[.1rem] text-[.75rem] border-b-black border-t-0 outline-none"
               defaultValue={userData.UPINumber}
-              onChange={(e)=>{ setupiMobNumber(e.target.value)
+              onChange={(e)=>{ setUserData(prevUserData=>({...prevUserData,UPINumber:e.target.value}))
               }}
               required
             />
@@ -262,13 +256,13 @@ const SetUserProfile = () => {
         <div className="flex flex-col pb-[1rem]">
         <label className=" text-kesari md:text-xl">Total Fund Raised</label>
           <label className=" overflow-hidden text-[.75rem] border-b-[.1rem] border-b-kesari md:text-xl">
-            0
+          {userData.TotalFundRasie}
           </label>
         </div>
         <div className="flex flex-col pb-[1rem]">
           <label className=" text-kesari md:text-xl">Blessings</label>
           <label className=" overflow-hidden text-[.75rem] border-b-[.1rem] border-b-kesari md:text-xl">
-            0
+          {userData.BlessingPoints}
           </label>
         </div>
         <div className="flex flex-col pb-[1rem]">
@@ -282,7 +276,7 @@ const SetUserProfile = () => {
               type="text"
               className="border-b-[.1rem] text-[.75rem] border-b-black border-t-0 outline-none"
               defaultValue={userData.Address}
-              onChange={(e)=>{ setAddress(e.target.value)
+              onChange={(e)=>{ setUserData(prevUserData=>({...prevUserData,Address:e.target.value}))
                 
               }}
               rows="4"
@@ -302,7 +296,7 @@ const SetUserProfile = () => {
               type="text"
               className="border-b-[.1rem] text-[.75rem] border-b-black border-t-0 outline-none"
               defaultValue={userData.Country}
-              onChange={(e)=>{ setCountry(e.target.value)
+              onChange={(e)=>{ setUserData(prevUserData=>({...prevUserData,Country:e.target.value}))
               }}
               required
             />
