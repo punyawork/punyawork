@@ -7,10 +7,12 @@ import divstGroupItem from "react-bootstrap";
 import { divstGroup } from "react-bootstrap";
 import SumitImage from '../../../../Images/UsersImages/sumit.JPG';
 import axios from "axios";
+import applicationbackendconfig from "../../../../applicationbackend.config";
 
 const UserProfile = forwardRef((props, ref) => {
+    const apiHost=applicationbackendconfig.apiHostUrl;
     const [show, setShow] = useState(false);
-    const UserProfileEndpoint = "https://localhost:44308/UserProfileDataByItsId?id=";
+    const UserProfileEndpoint = apiHost+"/UserProfileDataByItsId?id=";
     const [userData, setUserData] = useState({});
     const GetUserProfileData = async (id) => {
         try {
@@ -36,7 +38,7 @@ const UserProfile = forwardRef((props, ref) => {
     useImperativeHandle(ref, () => ({
         handleShow,
     }));
-    var ImgaeAPIURL = "https://localhost:44308/GetFile?filename=";
+    var ImgaeAPIURL = apiHost+"/GetFile?filename=";
     function getFileExtension(fileName) {
         return fileName.split('.').pop();
       }

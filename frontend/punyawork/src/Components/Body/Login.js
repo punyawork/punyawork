@@ -12,9 +12,11 @@ import axios from 'axios';
 import Modal from 'react-bootstrap/Modal';
 import Footer from '../Footer/Footer.js';
 import '../../Styles.css'
+import applicationbackendconfig from '../../applicationbackend.config.js';
 
 function Login() {
-  const endpoint = "https://localhost:44308/logindetail";
+  const apiHost=applicationbackendconfig.apiHostUrl;
+  const endpoint = apiHost+"/logindetail";
   const navigate = useNavigate();
   const [validated, setValidated] = useState(false);
   const [email, setEmail] = useState();
@@ -61,7 +63,7 @@ const[isLogin, setIsLogin]=useState(false);
   useEffect(()=>{
     const storedUserIdBase64 = localStorage.getItem('pwc');
     if(storedUserIdBase64!=null){
-      window.location.href = "http://localhost:3000/daanam";
+      navigate('/Daanam')
     }
   },[])
   return (

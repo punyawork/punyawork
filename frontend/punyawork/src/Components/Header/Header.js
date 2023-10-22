@@ -29,7 +29,7 @@ const Header = () => {
   };
   return (
     <Navbar collapseOnSelect  expand="lg"  className="bg-kesari">
-      <Navbar.Brand href="#home" className="pl-[1rem]">
+      <Navbar.Brand href="/" className="pl-[1rem]">
         <img className="rounded-[50%] w-[4rem]" src={punyawork} />
         <p className="text-white text-center text-[1rem]">एकैकं दानं</p>
       </Navbar.Brand>

@@ -5,10 +5,13 @@ import DaanCard from "./DaanCard";
 import axios from "axios";
 import Footer from "../../Footer/Footer";
 import { Spinner } from "react-bootstrap";
+import applicationbackendconfig from "../../../applicationbackend.config";
+import { useNavigate } from "react-router";
 const Daanam = () => {
-
+  const navigate = useNavigate();
   var AllFunds = [{}];
-  const GetAllFundsEndpoint = "https://localhost:44308/GetAllFundRaiseData";
+  const apiHost=applicationbackendconfig.apiHostUrl;
+  const GetAllFundsEndpoint = apiHost+"/GetAllFundRaiseData";
   const[AllFundsData,setAllFundsData]=useState([]);
 
   const GetAllFundRaiseData = async () => {
@@ -28,7 +31,7 @@ const Daanam = () => {
     GetAllFundRaiseData();
     const storedUserIdBase64 = localStorage.getItem('pwc');
     if(storedUserIdBase64==null){
-      window.location.href = "http://localhost:3000";
+      navigate('/')
     }
   }, []);
 
